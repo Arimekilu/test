@@ -1,15 +1,35 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template id="app">
+
+  <StopWatch
+      v-for="item in items"
+      :key="item.message"
+      :is="StopWatch">
+  </StopWatch>
+
+  <NewTimer v-on:click="newTimer"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StopWatch from "@/components/StopWatch";
+import NewTimer from "@/components/NewTimer";
+
 
 export default {
+  el: "#app",
   name: 'App',
   components: {
-    HelloWorld
+    StopWatch,
+    NewTimer,
+  },
+  data() {
+    return {
+      items: []
+    }
+  },
+  methods: {
+    newTimer() {
+      this.items.push(StopWatch)
+    }
   }
 }
 </script>
@@ -21,6 +41,34 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: 1024px;
+  margin-top: 72px;
+  /*align-items: center;*/
+  /*vertical-align: center;*/
 }
+
+@media (max-width: 1024px ) {
+  #app {
+    max-width: 1024px;
+
+  }
+}
+
+@media (max-width: 768px ) {
+  #app {
+    max-width: 768px;
+
+  }
+}
+
+@media (max-width: 320px ) {
+  #app {
+    max-width: 320px;
+  }
+}
+
+
 </style>
